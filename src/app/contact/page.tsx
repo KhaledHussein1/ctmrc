@@ -53,7 +53,7 @@ export default function ContactPage() {
             },
             {
               q: 'Is this club beginner-friendly?',
-              a: 'Absolutely! Whether you’re a first-time runner or training for your 10th marathon, you’re welcome here.',
+              a: 'Absolutely! Whether you are a first-time runner or training for your 10th marathon, you are welcome here.',
             },
             {
               q: 'How can I stay updated on events?',
