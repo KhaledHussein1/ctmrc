@@ -17,7 +17,7 @@ export default function EventsSection() {
             Seaside Park, 1 Barnum Dyke, Bridgeport, CT 06604
           </p>
           <p className="text-gray-800 dark:text-gray-200 text-lg leading-relaxed">
-            CTMRC’s First Annual 5k Run/Walk - Join us in making every step count for Palestine.
+            CTMRC&apos;s First Annual 5k Run/Walk - Join us in making every step count for Palestine.
           </p>
           <a
             href="https://www.movemint.cc/events/ctmrc"

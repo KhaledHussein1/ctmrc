@@ -22,13 +22,13 @@ export default function CommunityPage() {
         {/* Text */}
         <div className="md:flex-1 space-y-6 max-w-xl order-2 md:order-none">
           <p className="text-gray-300 text-lg leading-relaxed">
-            At the heart of Muslim Runners of Connecticut is a diverse and vibrant community. Whether you’re a casual jogger or marathon runner, here you’ll find encouragement, friendship, and shared values of faith and fitness.
+            At the heart of Muslim Runners of Connecticut is a diverse and vibrant community. Whether you&apos;re a casual jogger or marathon runner, here you&apos;ll find encouragement, friendship, and shared values of faith and fitness.
           </p>
           <p className="text-gray-300 text-lg leading-relaxed">
             Our community members come from all walks of life and support each other through every step—celebrating milestones, staying motivated, and inspiring healthy living.
           </p>
           <blockquote className="italic text-[#1c7c54] font-semibold border-l-4 border-[#1c7c54] pl-4">
-            “We live in a world in which we need to share responsibility. It’s easy to say ‘It’s not my child, not my community, not my world, not my problem.’ Then there are those who see the need and respond.”<br />— Fred Rogers
+            “We live in a world in which we need to share responsibility. It&apos;s easy to say &apos;It&apos;s not my child, not my community, not my world, not my problem.&apos; Then there are those who see the need and respond.”<br />— Fred Rogers
           </blockquote>
         </div>
       </section>
