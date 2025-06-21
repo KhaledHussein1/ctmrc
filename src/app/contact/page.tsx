@@ -13,7 +13,7 @@ export default function ContactPage() {
 
       {/* Contact Form */}
       <form
-        action="https://formsubmit.co/info@connecticutmrc.com"
+        action="https://getform.io/f/bkknrryb"
         method="POST"
         className="bg-[#111] border border-white/10 rounded-xl p-6 space-y-4 shadow-lg"
       >
@@ -48,7 +48,7 @@ export default function ContactPage() {
         </button>
 
         {/* Prevent spam */}
-        <input type="hidden" name="_captcha" value="false" />
+        <input type="text" name="_gotcha" style={{ display: 'none' }} />
       </form>
 
       {/* FAQs */}
