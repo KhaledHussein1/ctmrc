@@ -46,10 +46,9 @@ export default function ContactPage() {
         >
           Send Message
         </button>
+
         {/* Prevent spam */}
         <input type="hidden" name="_captcha" value="false" />
-        {/* Optional: redirect after submit */}
-        <input type="hidden" name="_next" value="https://yourwebsite.com/thank-you" />
       </form>
 
       {/* FAQs */}
