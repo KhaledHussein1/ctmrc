@@ -1,5 +1,6 @@
 'use client';
 
+import Image from 'next/image';
 import { useRef, useState } from 'react';
 
 const images = [
@@ -27,21 +28,22 @@ export default function SmoothAutoCarousel() {
           animation: 'scrollLeft 30s linear infinite',
         }}
       >
-        {/* Duplicate images for seamless loop */}
         {[...images, ...images].map((src, i) => (
           <div
             key={i}
             className={`inline-block flex-shrink-0 rounded-lg overflow-hidden shadow-lg transform transition-transform duration-300 ${
               isHovered ? 'scale-105 shadow-2xl' : 'scale-100'
             }`}
-            style={{ width: 280, height: 180 }}
+            style={{ width: 280, height: 180, position: 'relative' }} // position relative needed for next/image
           >
-            <img
+            <Image
               src={src}
               alt={`Gallery image ${i % images.length + 1}`}
-              className="w-full h-full object-cover"
+              fill // fills the parent div
+              sizes="280px"
+              style={{ objectFit: 'cover' }}
+              priority={i < images.length ? true : false} // prioritize first set of images (optional)
               draggable={false}
-              loading="lazy"
             />
           </div>
         ))}

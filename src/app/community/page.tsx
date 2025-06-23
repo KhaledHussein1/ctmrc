@@ -1,4 +1,6 @@
-// app/community/page.tsx
+'use client';
+
+import Image from 'next/image';
 
 export default function CommunityPage() {
   return (
@@ -10,12 +12,14 @@ export default function CommunityPage() {
       {/* Split Section: Image + Text */}
       <section className="flex flex-col md:flex-row items-center md:items-start gap-12 md:gap-20">
         {/* Image */}
-        <div className="md:flex-1 flex justify-center md:justify-start order-1 md:order-none">
-          <img
+        <div className="md:flex-1 flex justify-center md:justify-start order-1 md:order-none relative max-w-[600px] w-full max-h-[450px] h-auto">
+          <Image
             src="/community-run.jpg"
             alt="Muslim Runners Community Gathering"
-            className="rounded-2xl shadow-2xl max-w-[600px] w-full h-auto object-contain max-h-[450px]"
-            loading="lazy"
+            width={600}
+            height={450}
+            className="rounded-2xl shadow-2xl object-contain"
+            priority={false}
           />
         </div>
 

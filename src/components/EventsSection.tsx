@@ -1,7 +1,10 @@
+'use client';
+
+import Image from 'next/image';
+
 export default function EventsSection() {
   return (
     <section className="w-full mt-0 mb-16 px-6 md:px-12 lg:px-20 py-8 rounded-2xl bg-gradient-to-r from-[#1c7c54]/10 to-[#146943]/10 shadow-lg">
-
       {/* Title */}
       <h2 className="text-3xl font-extrabold mb-6 text-[#1c7c54] tracking-wide max-w-5xl mx-auto">
         Upcoming Event
@@ -30,12 +33,14 @@ export default function EventsSection() {
         </div>
 
         {/* Right: Banner Image */}
-        <div className="md:flex-1 flex justify-center">
-          <img
+        <div className="md:flex-1 flex justify-center relative w-full max-w-[500px] h-auto">
+          <Image
             src="/5k-run.png"
             alt="2025 CTMRC 5K Run/Walk for Palestine Banner"
-            className="w-full max-w-[500px] h-auto object-contain rounded-xl shadow-lg"
-            loading="lazy"
+            width={500}
+            height={300} // adjust height to your image aspect ratio
+            className="rounded-xl shadow-lg object-contain"
+            priority={false}
           />
         </div>
       </div>

@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import Image from 'next/image';
 
 export function Hero() {
   const [email, setEmail] = useState('');
@@ -30,11 +31,19 @@ export function Hero() {
   };
 
   return (
-    <section
-      className="relative h-[90vh] bg-cover bg-center flex items-center justify-center text-white text-center px-4"
-      style={{ backgroundImage: "url('/run-hero.jpg')" }}
-    >
-      <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-60"></div>
+    <section className="relative h-[90vh] flex items-center justify-center text-white text-center px-4 overflow-hidden">
+      {/* Background Image */}
+      <Image
+        src="/run-hero.jpg"
+        alt="Running hero background"
+        fill
+        priority
+        style={{ objectFit: 'cover' }}
+        className="-z-10"
+      />
+
+      {/* Gradient overlay */}
+      <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-60 -z-10"></div>
 
       <div className="relative bg-black/75 backdrop-blur-md p-6 rounded-2xl max-w-3xl z-10 shadow-xl border border-white/10 w-full">
         <h1 className="text-5xl font-bold mb-4 tracking-tight drop-shadow-md">
