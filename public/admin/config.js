@@ -1,0 +1,30 @@
+CMS.init({
+  config: {
+    backend: {
+      name: "github",
+      repo: "KhaledHussein1/ctmrc", 
+      branch: "main"
+    },
+    media_folder: "public/uploads",
+    public_folder: "/uploads",
+    collections: [
+      {
+        name: "gallery",
+        label: "Gallery Page",
+        file: "public/content/gallery.json",
+        fields: [
+          {
+            label: "Images",
+            name: "images",
+            widget: "list",
+            fields: [
+              { label: "Image", name: "src", widget: "image" },
+              { label: "Alt Text", name: "alt", widget: "string" },
+              { label: "Caption", name: "caption", widget: "string" }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+});
