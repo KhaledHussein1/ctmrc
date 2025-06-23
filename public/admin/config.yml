@@ -1,15 +1,7 @@
-backend:
-  name: github
-  repo: KhaledHussein1/ctmrc  # ← ✅ your actual GitHub repo
-  branch: main
-
-media_folder: "public/uploads"
-public_folder: "/uploads"
-
 collections:
   - name: "gallery"
     label: "Gallery Page"
-    file: "public/content/gallery.json"
+    file: "content/gallery.json"   # <--- Remove 'public/'
     fields:
       - label: "Images"
         name: "images"
