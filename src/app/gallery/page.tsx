@@ -1,7 +1,6 @@
 'use client';
 
-// @ts-ignore
-import galleryData from '../../content/gallery.json'; // adjust path based on your file structure
+import galleryData from '../../../content/gallery.json'; // adjust path based on your file structure
 
 interface GalleryImage {
   src: string;
@@ -10,7 +9,7 @@ interface GalleryImage {
 }
 
 export default function GalleryPage() {
-  const images: GalleryImage[] = galleryData.images || [];
+  const images: GalleryImage[] = galleryData || [];
 
   return (
     <div className="p-8 max-w-6xl mx-auto text-white">
