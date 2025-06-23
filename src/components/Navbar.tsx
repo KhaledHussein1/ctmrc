@@ -3,7 +3,7 @@
 import Link from 'next/link';
 import { useState, useEffect } from 'react';
 import { usePathname } from 'next/navigation';
-import { FaInstagram, FaFacebook, FaTiktok } from 'react-icons/fa';
+import { FaInstagram } from 'react-icons/fa';
 
 export function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
@@ -85,14 +85,8 @@ export function Navbar() {
 
         {/* Right: Social Icons (desktop only) */}
         <div className="hidden md:flex gap-6 text-xl text-green-700">
-          <Link href="https://instagram.com" target="_blank" aria-label="Instagram" rel="noopener noreferrer">
+          <Link href="https://www.instagram.com/runctmrc/?igsh=NWJzb3RnNnNheWls&utm_source=qr" target="_blank" aria-label="Instagram" rel="noopener noreferrer">
             <FaInstagram className="hover:text-green-900 transition" />
-          </Link>
-          <Link href="https://facebook.com" target="_blank" aria-label="Facebook" rel="noopener noreferrer">
-            <FaFacebook className="hover:text-green-900 transition" />
-          </Link>
-          <Link href="https://tiktok.com" target="_blank" aria-label="TikTok" rel="noopener noreferrer">
-            <FaTiktok className="hover:text-green-900 transition" />
           </Link>
         </div>
 
@@ -126,14 +120,8 @@ export function Navbar() {
 
             {/* Social Icons fixed at bottom */}
             <div className="absolute bottom-8 flex gap-8 text-3xl text-green-700">
-              <Link href="https://instagram.com" target="_blank" aria-label="Instagram" rel="noopener noreferrer">
+              <Link href="https://www.instagram.com/runctmrc/?igsh=NWJzb3RnNnNheWls&utm_source=qr" target="_blank" aria-label="Instagram" rel="noopener noreferrer">
                 <FaInstagram />
-              </Link>
-              <Link href="https://facebook.com" target="_blank" aria-label="Facebook" rel="noopener noreferrer">
-                <FaFacebook />
-              </Link>
-              <Link href="https://tiktok.com" target="_blank" aria-label="TikTok" rel="noopener noreferrer">
-                <FaTiktok />
               </Link>
             </div>
           </div>
