@@ -6,6 +6,9 @@
   },
   "media_folder": "public/uploads",
   "public_folder": "/uploads",
+  "media_library": {
+    "name": "uploadcare" 
+  },
   "collections": [
     {
       "name": "gallery",
