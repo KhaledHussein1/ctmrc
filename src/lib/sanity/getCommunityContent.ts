@@ -1,11 +1,11 @@
-// lib/sanity/getCommunityContent.ts
 import { client } from './client'
 import imageUrlBuilder from '@sanity/image-url'
+import type { Image as SanityImageSource } from 'sanity' 
 
 const builder = imageUrlBuilder(client)
 
-function urlFor(source: any) {
-  return builder.image(source)
+function urlFor(source: SanityImageSource | null | undefined) {
+  return builder.image(source!)
 }
 
 export async function getCommunityContent() {
@@ -21,7 +21,7 @@ export async function getCommunityContent() {
   const data = await client.fetch(query)
 
   return {
-    imageUrl: urlFor(data.mainImage).width(600).height(450).url(),
+    imageUrl: urlFor(data.mainImage)?.width(600).height(450).url(),
     altText: data.altText,
     paragraphs: data.paragraphs,
     quote: data.quote,
