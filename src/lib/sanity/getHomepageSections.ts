@@ -39,7 +39,7 @@ export async function getHomepageSections() {
     description: item.description,
     cta: item.ctaLabel && item.ctaHref
       ? { label: item.ctaLabel, href: item.ctaHref }
-      : null,
+      : undefined,
     imageUrl: urlFor(item.image).width(1200).url(),
     alt: item.alt || '',
     imageLeft: item.imageLeft ?? false,
