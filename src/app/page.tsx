@@ -1,34 +1,38 @@
-// app/page.tsx
-'use client';
+'use client'
 
-// import { Hero } from '@/components/Hero';
-import { Hero } from '../components/Hero';
-import { Section } from '../components/Section';
-import { QuoteSection } from '../components/QuoteSection';
-import GalleryCarousel from '../components/GalleryCarousel';
-import EventsSection from '../components/EventsSection';
+import { useEffect, useState } from 'react'
+import { Hero } from '../components/Hero'
+import { Section } from '../components/Section'
+import { QuoteSection } from '../components/QuoteSection'
+import GalleryCarousel from '../components/GalleryCarousel'
+import EventsSection from '../components/EventsSection'
+import { getHomepageSections } from '@/lib/sanity/getHomepageSections'
+
+interface HomepageSection {
+  id: string
+  title: string
+  description: string
+  cta?: { label: string; href: string }
+  imageUrl: string
+  imageLeft?: boolean
+}
 
 export default function HomePage() {
+  const [sections, setSections] = useState<HomepageSection[]>([])
+
+  useEffect(() => {
+    getHomepageSections().then(setSections)
+  }, [])
+
   return (
     <main>
       <Hero />
       <EventsSection />
-      <Section
-        title="Run with Purpose, Together."
-        description="Whether you&apos;re chasing a personal best or enjoying a peaceful jog at dawn, our club brings together Muslims across Connecticut who believe in strengthening both body and soul. We run in unity — driven by community, powered by faith."
-        cta={{ label: "Join Our Community", href: "/community" }}
-        image="/group-run.jpg"
-        imageLeft
-      />
-      <Section
-        title="Meet the Community"
-        description="From early morning jogs to group 5Ks, our members bring energy, diversity, and a shared love for running and faith. It&apos;s not just about the pace — it&apos;s about the people you run beside. Come meet your new running family."
-        cta={{ label: 'See the Vibes on Instagram', href: '/community' }}
-        image="/community.jpg"
-        imageLeft={false}
-      />
+      {sections.map((section) => (
+        <Section key={section.id} section={section} />
+      ))}
       <GalleryCarousel />
       <QuoteSection />
     </main>
-  );
+  )
 }

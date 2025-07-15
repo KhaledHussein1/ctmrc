@@ -1,57 +1,73 @@
-'use client';
+'use client'
 
-import { useState } from 'react';
-import Image from 'next/image';
+import { useEffect, useState } from 'react'
+import Image from 'next/image'
+import { getHero } from '@/lib/sanity/getHero'
+
+interface HeroContent {
+  heading: string
+  subheading: string
+  imageUrl: string
+  alt: string
+  formTitle?: string
+  formDescription?: string
+}
 
 export function Hero() {
-  const [email, setEmail] = useState('');
-  const [submitted, setSubmitted] = useState(false);
+  const [email, setEmail] = useState('')
+  const [submitted, setSubmitted] = useState(false)
+  const [content, setContent] = useState<HeroContent | null>(null)
+
+  useEffect(() => {
+    getHero().then(setContent)
+  }, [])
 
   const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
+    e.preventDefault()
 
     try {
       const res = await fetch('/api/subscribe', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email }),
-      });
+      })
 
       if (res.ok) {
-        setSubmitted(true);
-        setEmail('');
+        setSubmitted(true)
+        setEmail('')
       } else {
-        const { error } = await res.json();
-        alert(`Subscription failed: ${error?.message || 'Try again later.'}`);
+        const { error } = await res.json()
+        alert(`Subscription failed: ${error?.message || 'Try again later.'}`)
       }
     } catch (err) {
-      console.error(err);
-      alert('Something went wrong. Please try again.');
+      console.error(err)
+      alert('Something went wrong. Please try again.')
     }
-  };
+  }
+
+  if (!content) return null
 
   return (
     <section className="relative h-[90vh] flex items-center justify-center text-white text-center px-4 overflow-hidden">
       {/* Background Image */}
       <Image
-        src="/run-hero.jpg"
-        alt="Running hero background"
+        src={content.imageUrl}
+        alt={content.alt}
         fill
         priority
         style={{ objectFit: 'cover' }}
         className="-z-10"
       />
 
-      {/* Gradient overlay */}
+      {/* Overlay */}
       <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-60 -z-10"></div>
 
+      {/* Content */}
       <div className="relative bg-black/75 backdrop-blur-md p-6 rounded-2xl max-w-3xl z-10 shadow-xl border border-white/10 w-full">
         <h1 className="text-5xl font-bold mb-4 tracking-tight drop-shadow-md">
-          Connecticut Muslim Running Club
+          {content.heading}
         </h1>
-        <p className="text-lg mb-8 drop-shadow-sm">
-          Join a community where faith and fitness come together.
-        </p>
+        <p className="text-lg mb-8 drop-shadow-sm">{content.subheading}</p>
 
         <div className="bg-white/90 backdrop-blur-md text-black p-6 rounded-2xl shadow-lg border border-white/30 w-full max-w-xl mx-auto">
           {submitted ? (
@@ -60,9 +76,12 @@ export function Hero() {
             </p>
           ) : (
             <>
-              <h3 className="text-xl font-semibold mb-1">Stay in the loop</h3>
+              <h3 className="text-xl font-semibold mb-1">
+                {content.formTitle || 'Stay in the loop'}
+              </h3>
               <p className="text-sm mb-4 text-gray-700">
-                Be the first to hear about upcoming runs, events, and more.
+                {content.formDescription ||
+                  'Be the first to hear about upcoming runs, events, and more.'}
               </p>
               <form
                 onSubmit={handleSubmit}
@@ -88,5 +107,5 @@ export function Hero() {
         </div>
       </div>
     </section>
-  );
+  )
 }

@@ -1,20 +1,25 @@
-'use client';
+'use client'
 
-import Image from 'next/image';
-import { useRef, useState } from 'react';
+import Image from 'next/image'
+import { useEffect, useRef, useState } from 'react'
+import { getHomepageGallery } from '@/lib/sanity/getHomepageGallery'
 
-const images = [
-  '/g1.jpg',
-  '/g2.jpg',
-  '/g3.jpg',
-  '/g4.jpg',
-  '/g5.jpg',
-  '/g6.jpg',
-];
+interface GalleryImage {
+  id: string
+  imageUrl: string
+  alt: string
+}
 
 export default function SmoothAutoCarousel() {
-  const containerRef = useRef<HTMLDivElement>(null);
-  const [isHovered, setIsHovered] = useState(false);
+  const containerRef = useRef<HTMLDivElement>(null)
+  const [isHovered, setIsHovered] = useState(false)
+  const [images, setImages] = useState<GalleryImage[]>([])
+
+  useEffect(() => {
+    getHomepageGallery().then(setImages)
+  }, [])
+
+  if (!images.length) return null
 
   return (
     <section className="w-full bg-white py-12 overflow-hidden select-none">
@@ -28,21 +33,21 @@ export default function SmoothAutoCarousel() {
           animation: 'scrollLeft 30s linear infinite',
         }}
       >
-        {[...images, ...images].map((src, i) => (
+        {[...images, ...images].map(({ id, imageUrl, alt }, i) => (
           <div
-            key={i}
+            key={`${id}-${i}`}
             className={`inline-block flex-shrink-0 rounded-lg overflow-hidden shadow-lg transform transition-transform duration-300 ${
               isHovered ? 'scale-105 shadow-2xl' : 'scale-100'
             }`}
-            style={{ width: 280, height: 180, position: 'relative' }} // position relative needed for next/image
+            style={{ width: 280, height: 180, position: 'relative' }}
           >
             <Image
-              src={src}
-              alt={`Gallery image ${i % images.length + 1}`}
-              fill // fills the parent div
+              src={imageUrl}
+              alt={alt}
+              fill
               sizes="280px"
               style={{ objectFit: 'cover' }}
-              priority={i < images.length ? true : false} // prioritize first set of images (optional)
+              priority={i < images.length}
               draggable={false}
             />
           </div>
@@ -66,5 +71,6 @@ export default function SmoothAutoCarousel() {
         }
       `}</style>
     </section>
-  );
+  )
 }
+

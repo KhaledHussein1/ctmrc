@@ -1,6 +1,21 @@
-// app/contact/page.tsx
+'use client'
+
+import { useEffect, useState } from 'react'
+import { getFAQs } from '@/lib/sanity/getFAQs'
+
+interface FAQItem {
+  id: string
+  question: string
+  answer: string
+}
 
 export default function ContactPage() {
+  const [faqs, setFaqs] = useState<FAQItem[]>([])
+
+  useEffect(() => {
+    getFAQs().then(setFaqs)
+  }, [])
+
   return (
     <div className="p-8 max-w-4xl mx-auto space-y-12 text-white">
       {/* Heading */}
@@ -52,37 +67,22 @@ export default function ContactPage() {
       </form>
 
       {/* FAQs */}
-      <div>
-        <h2 className="text-2xl font-bold mb-4">Frequently Asked Questions</h2>
-        <div className="space-y-4">
-          {[
-            {
-              q: 'Do I have to be Muslim to join?',
-              a: "No! Our community is open to everyone who shares a love for running and respects our values.",
-            },
-            {
-              q: 'Where and when do you meet?',
-              a: 'We usually meet at local parks or trails in Connecticut every weekend. Times and locations vary—check our Instagram or email updates.',
-            },
-            {
-              q: 'Is this club beginner-friendly?',
-              a: 'Absolutely! Whether you are a first-time runner or training for your 10th marathon, you are welcome here.',
-            },
-            {
-              q: 'How can I stay updated on events?',
-              a: 'Subscribe via the homepage, follow us on Instagram, or join our email newsletter to stay in the loop.',
-            },
-          ].map(({ q, a }) => (
-            <div
-              key={q}
-              className="bg-[#111] p-4 rounded-lg border border-white/10 shadow-sm"
-            >
-              <h3 className="font-semibold text-lg text-white">{q}</h3>
-              <p className="text-gray-300 mt-1">{a}</p>
-            </div>
-          ))}
+      {faqs.length > 0 && (
+        <div>
+          <h2 className="text-2xl font-bold mb-4">Frequently Asked Questions</h2>
+          <div className="space-y-4">
+            {faqs.map(({ id, question, answer }) => (
+              <div
+                key={id}
+                className="bg-[#111] p-4 rounded-lg border border-white/10 shadow-sm"
+              >
+                <h3 className="font-semibold text-lg text-white">{question}</h3>
+                <p className="text-gray-300 mt-1">{answer}</p>
+              </div>
+            ))}
+          </div>
         </div>
-      </div>
+      )}
     </div>
-  );
+  )
 }

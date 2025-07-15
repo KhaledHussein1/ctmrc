@@ -5,8 +5,8 @@ import { Footer } from '../components/Footer';
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'Muslim Runners of Connecticut',
-  description: 'Where faith and fitness meet.',
+  title: 'CT Muslim Running Club',
+  description: 'Connecticut Muslim Running Club: Where Faith and Fitness Meet.',
 };
 
 export default function RootLayout({
