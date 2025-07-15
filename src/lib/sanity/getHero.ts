@@ -1,10 +1,20 @@
-// lib/sanity/getHero.ts
 import { client } from './client'
 import imageUrlBuilder from '@sanity/image-url'
+import type { Image as SanityImageSource } from 'sanity'
 
 const builder = imageUrlBuilder(client)
-function urlFor(source: any) {
-  return builder.image(source)
+
+function urlFor(source: SanityImageSource | null | undefined) {
+  return builder.image(source!)
+}
+
+type Hero = {
+  heading: string
+  subheading: string
+  backgroundImage: SanityImageSource
+  alt: string
+  formTitle: string
+  formDescription: string
 }
 
 export async function getHero() {
@@ -17,7 +27,7 @@ export async function getHero() {
     formDescription
   }`
 
-  const data = await client.fetch(query)
+  const data: Hero = await client.fetch(query)
 
   return {
     heading: data.heading,

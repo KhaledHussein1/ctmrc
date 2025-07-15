@@ -1,10 +1,22 @@
-// lib/sanity/getHomepageSections.ts
 import { client } from './client'
 import imageUrlBuilder from '@sanity/image-url'
+import type { Image as SanityImageSource } from 'sanity'
 
 const builder = imageUrlBuilder(client)
-function urlFor(source: any) {
-  return builder.image(source)
+
+function urlFor(source: SanityImageSource | null | undefined) {
+  return builder.image(source!)
+}
+
+type HomepageSection = {
+  _id: string
+  title: string
+  description: string
+  ctaLabel?: string
+  ctaHref?: string
+  image: SanityImageSource
+  alt?: string
+  imageLeft?: boolean
 }
 
 export async function getHomepageSections() {
@@ -19,15 +31,17 @@ export async function getHomepageSections() {
     imageLeft
   }`
 
-  const data = await client.fetch(query)
+  const data: HomepageSection[] = await client.fetch(query)
 
-  return data.map((item: any) => ({
+  return data.map((item) => ({
     id: item._id,
     title: item.title,
     description: item.description,
-    cta: item.ctaLabel && item.ctaHref ? { label: item.ctaLabel, href: item.ctaHref } : null,
+    cta: item.ctaLabel && item.ctaHref
+      ? { label: item.ctaLabel, href: item.ctaHref }
+      : null,
     imageUrl: urlFor(item.image).width(1200).url(),
     alt: item.alt || '',
-    imageLeft: item.imageLeft,
+    imageLeft: item.imageLeft ?? false,
   }))
 }

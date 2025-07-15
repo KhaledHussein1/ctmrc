@@ -1,10 +1,17 @@
-// lib/sanity/getHomepageGallery.ts
 import { client } from './client'
 import imageUrlBuilder from '@sanity/image-url'
+import type { Image as SanityImageSource } from 'sanity'
 
 const builder = imageUrlBuilder(client)
-function urlFor(source: any) {
-  return builder.image(source)
+
+function urlFor(source: SanityImageSource | null | undefined) {
+  return builder.image(source!)
+}
+
+type HomepageGalleryItem = {
+  _id: string
+  image: SanityImageSource
+  alt: string
 }
 
 export async function getHomepageGallery() {
@@ -14,9 +21,9 @@ export async function getHomepageGallery() {
     alt
   }`
 
-  const data = await client.fetch(query)
+  const data: HomepageGalleryItem[] = await client.fetch(query)
 
-  return data.map((item: any) => ({
+  return data.map((item) => ({
     id: item._id,
     alt: item.alt,
     imageUrl: urlFor(item.image).width(600).height(400).url(),

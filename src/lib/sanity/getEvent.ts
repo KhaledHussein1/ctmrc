@@ -1,10 +1,13 @@
-// lib/sanity/getEvent.ts
 import { client } from './client'
 import imageUrlBuilder from '@sanity/image-url'
+// Optional: add type safety for image source
+import type { Image as SanityImageSource } from 'sanity'
 
 const builder = imageUrlBuilder(client)
-function urlFor(source: any) {
-  return builder.image(source)
+
+// Fixed: replaced `any` with better type
+function urlFor(source: SanityImageSource | null | undefined) {
+  return builder.image(source!)
 }
 
 export async function getEvent() {
@@ -26,7 +29,7 @@ export async function getEvent() {
     location: data.location,
     description: data.description,
     link: data.link,
-    imageUrl: urlFor(data.image).width(800).url(),
+    imageUrl: urlFor(data.image)?.width(800).url(),
     alt: data.alt,
   }
 }
